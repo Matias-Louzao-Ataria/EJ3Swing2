@@ -61,8 +61,8 @@ public class Clase extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        this.txf1.setText("");
-        this.txf2.setText("");
+        this.txf1.setText("Escribe aquí lo que quieras agragar al primer combobox");
+        this.txf2.setText("Escribe aquí lo que quieras eliminar del primer combobox");
         this.cbA.removeAllItems();
         this.cbB.removeAllItems();
     }
