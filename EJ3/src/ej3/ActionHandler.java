@@ -1,8 +1,10 @@
 package ej3;
 
-import java.awt.Component;
 import java.awt.event.*;
 import java.util.ArrayList;
+
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 public class ActionHandler implements ActionListener {
 
@@ -33,15 +35,26 @@ public class ActionHandler implements ActionListener {
             } else {
                 this.c.txf2.setSize(this.c.txf2.getPreferredSize());
                 for (int i = 0; i < this.c.cbA.getItemCount(); i++) {
-                    System.err.println(this.c.cbA.getItemAt(i).toString());
                     if (((String) this.c.cbA.getItemAt(i)).contains(this.c.txf2.getText())) {
-                        this.c.cbA.removeItem(this.c.cbA.getItemAt(i)); 
+                        this.c.cbA.removeItem(this.c.cbA.getItemAt(i));
                     }
                     this.c.cbA.setSize(this.c.cbA.getPreferredSize());
                 }
             }
         } else {
-
+            if(arg0.getSource() == this.c.btnTraspasar){
+                if(this.c.cbA.getSelectedIndex() != -1){
+                    traspasar(this.c.cbA,this.c.cbB);
+                }else{
+                    JOptionPane.showMessageDialog(this.c, "El combobox de destino está vacio!");
+                }
+            }else{
+                if(this.c.cbB.getSelectedIndex() != -1){
+                    traspasar(this.c.cbB,this.c.cbA);
+                }else{
+                    JOptionPane.showMessageDialog(this.c, "El combobox de destino está vacio!");
+                }
+            }
         }
     }
 
@@ -53,14 +66,21 @@ public class ActionHandler implements ActionListener {
         res = res.replace(";;", "");
 
         for (int j = 0; j < res.length(); j++) {
-            if((res.charAt(j) == ';' || j == 0) && j < res.length()-1){
+            if ((res.charAt(j) == ';' || j == 0) && j < res.length() - 1) {
                 opciones.add("");
                 cont++;
             }
-            if(res.charAt(j) != ';'){
+            if (res.charAt(j) != ';') {
                 opciones.set(cont, opciones.get(cont) + res.charAt(j));
             }
         }
+    }
+
+    private void traspasar(JComboBox<String> origen,JComboBox<String> destino) {
+        destino.addItem(origen.getSelectedItem().toString());
+        origen.removeItem(origen.getSelectedItem());
+        origen.setSize(origen.getPreferredSize());
+        destino.setSize(destino.getPreferredSize());
     }
 
 }
