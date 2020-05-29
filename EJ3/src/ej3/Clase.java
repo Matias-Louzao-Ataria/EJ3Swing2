@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Clase extends JFrame {
+public class Clase extends JFrame implements ActionListener {
     
     JComboBox<String> cbA = new JComboBox<String>();
     JComboBox<String> cbB = new JComboBox<String>();
@@ -19,6 +19,7 @@ public class Clase extends JFrame {
     JLabel lbl2= new JLabel();
     JLabel lbl3= new JLabel();
     ArrayList<Object> componentes = new ArrayList<>(); 
+    Timer timer = new Timer(60000,this);
     int x = 20,y = 10;
 
     public Clase(){
@@ -55,5 +56,14 @@ public class Clase extends JFrame {
             this.add(comp);
         }
         this.cbB.setToolTipText("Indice del elemento seleccionado: "+this.cbB.getSelectedIndex());
+        timer.start();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent arg0) {
+        this.txf1.setText("");
+        this.txf2.setText("");
+        this.cbA.removeAllItems();
+        this.cbB.removeAllItems();
     }
 }

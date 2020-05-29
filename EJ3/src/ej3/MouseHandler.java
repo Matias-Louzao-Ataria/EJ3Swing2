@@ -18,6 +18,7 @@ public class MouseHandler extends MouseAdapter {
         if(e.getSource() == this.c.btnQuitar){
             this.c.btnQuitar.setForeground(Color.RED);
         }
+        this.c.timer.restart();
     }
 
     @Override
@@ -25,6 +26,7 @@ public class MouseHandler extends MouseAdapter {
         if(e.getSource() == this.c.btnQuitar){
             this.c.btnQuitar.setForeground(null);
         }
+        this.c.timer.restart();
     }
 
 }

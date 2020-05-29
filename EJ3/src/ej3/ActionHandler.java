@@ -56,6 +56,7 @@ public class ActionHandler implements ActionListener {
                 }
             }
         }
+        this.c.timer.restart();
     }
 
     private void tratarString(ArrayList<String> opciones) {
