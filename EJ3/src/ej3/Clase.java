@@ -35,27 +35,33 @@ public class Clase extends JFrame implements ActionListener {
         componentes.add(lbl1);
         componentes.add(lbl2);
         componentes.add(lbl3);
-        this.addWindowListener(new WindowHandler(this));
-        cbA.addItemListener(new ItemHandler(this));
-        cbB.addItemListener(new ItemHandler(this));
-        this.btnQuitar.addMouseListener(new MouseHandler(this));
-        
+
         for(int i = 0;i < this.componentes.size();i++){
             JComponent comp = (JComponent)this.componentes.get(i);
             comp.setSize(comp.getPreferredSize());
             comp.setLocation(x,y);
             x+=0;
             y+=40;
-            try {
-                JButton b = (JButton) comp;
-                b.addActionListener(new ActionHandler(this));   
-            } catch (ClassCastException e) {
-                
-            }
+            
             comp.setToolTipText("Este es el elemento: "+(i+1));
             this.add(comp);
         }
+
+        this.addWindowListener(new WindowHandler(this));
+        cbA.addItemListener(new ItemHandler(this));
+
+        cbB.addItemListener(new ItemHandler(this));
         this.cbB.setToolTipText("Indice del elemento seleccionado: "+this.cbB.getSelectedIndex());
+        
+        btnAñadir.addActionListener(new ActionHandler(this));
+
+        this.btnQuitar.addMouseListener(new MouseHandler(this));
+        btnQuitar.addActionListener(new ActionHandler(this));
+
+        btnTraspasar.addActionListener(new ActionHandler(this));
+
+        btnTranspasar2.addActionListener(new ActionHandler(this));
+
         timer.start();
     }
 
