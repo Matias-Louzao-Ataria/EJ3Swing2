@@ -18,6 +18,7 @@ public class WindowHandler extends WindowAdapter{
         if(select == 0){
             this.c.dispose();
         }
+        this.c.timer.restart();
     }
 
 }

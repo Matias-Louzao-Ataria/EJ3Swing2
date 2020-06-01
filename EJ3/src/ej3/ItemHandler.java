@@ -18,6 +18,6 @@ public class ItemHandler implements ItemListener {
         }else{
             this.c.cbB.setToolTipText("Indice del elemento seleccionado: "+this.c.cbB.getSelectedIndex());
         }
-
+        this.c.timer.restart();
     }
 }

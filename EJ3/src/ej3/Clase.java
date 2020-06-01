@@ -2,7 +2,6 @@ package ej3;
 
 import java.util.ArrayList;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class Clase extends JFrame implements ActionListener {
@@ -24,7 +23,7 @@ public class Clase extends JFrame implements ActionListener {
 
     public Clase(){
         super("Ejercicio 3");
-        this.addWindowListener(new WindowHandler(this));
+        this.setLayout(null);
         componentes.add(cbA);
         componentes.add(cbB);
         componentes.add(btnAñadir);
@@ -36,10 +35,11 @@ public class Clase extends JFrame implements ActionListener {
         componentes.add(lbl1);
         componentes.add(lbl2);
         componentes.add(lbl3);
+        this.addWindowListener(new WindowHandler(this));
         cbA.addItemListener(new ItemHandler(this));
         cbB.addItemListener(new ItemHandler(this));
         this.btnQuitar.addMouseListener(new MouseHandler(this));
-        this.setLayout(null);
+        
         for(int i = 0;i < this.componentes.size();i++){
             JComponent comp = (JComponent)this.componentes.get(i);
             comp.setSize(comp.getPreferredSize());

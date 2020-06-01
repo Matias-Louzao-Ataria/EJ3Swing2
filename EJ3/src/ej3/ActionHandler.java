@@ -21,12 +21,8 @@ public class ActionHandler implements ActionListener {
             String res = "";
             ArrayList<String> opciones = new ArrayList<>();
             if (this.c.txf1.getText().trim().length() != 0) {
-                tratarString(opciones);
-
-                for (String string : opciones) {
-                    this.c.cbA.addItem(string);
-                    this.c.cbA.setSize(this.c.cbA.getPreferredSize());
-                }
+                añadir(opciones);
+                this.c.cbA.setSize(this.c.cbA.getPreferredSize());
             }
         } else if (arg0.getSource() == this.c.btnQuitar) {
             if (this.c.txf2.getText().trim().length() == 0) {
@@ -34,50 +30,50 @@ public class ActionHandler implements ActionListener {
                 this.c.cbA.setSize(this.c.cbA.getPreferredSize());
             } else {
                 this.c.txf2.setSize(this.c.txf2.getPreferredSize());
-                for (int i = 0; i < this.c.cbA.getItemCount(); i++) {
-                    if (((String) this.c.cbA.getItemAt(i)).contains(this.c.txf2.getText())) {
+                int tamaño = this.c.cbA.getItemCount();
+                for (int i = tamaño - 1; i >= 0; i--) {
+                    if ((this.c.cbA.getItemAt(i)).toString().contains(this.c.txf2.getText())) {
                         this.c.cbA.removeItem(this.c.cbA.getItemAt(i));
+                        System.out.println(i);
                     }
-                    this.c.cbA.setSize(this.c.cbA.getPreferredSize());
                 }
+                this.c.cbA.setSize(this.c.cbA.getPreferredSize());
+                this.c.cbA.setSelectedIndex(0);
             }
         } else {
-            if(arg0.getSource() == this.c.btnTraspasar){
-                if(this.c.cbA.getSelectedIndex() != -1){
-                    traspasar(this.c.cbA,this.c.cbB);
-                }else{
-                    JOptionPane.showMessageDialog(this.c, "El combobox de destino está vacio!");
+            if (arg0.getSource() == this.c.btnTraspasar) {
+                if (this.c.cbA.getSelectedIndex() != -1) {
+                    traspasar(this.c.cbA, this.c.cbB);
+                } else {
+                    JOptionPane.showMessageDialog(this.c, "El combobox de origen está vacio!");
                 }
-            }else{
-                if(this.c.cbB.getSelectedIndex() != -1){
-                    traspasar(this.c.cbB,this.c.cbA);
-                }else{
-                    JOptionPane.showMessageDialog(this.c, "El combobox de destino está vacio!");
+            } else {
+                if (this.c.cbB.getSelectedIndex() != -1) {
+                    traspasar(this.c.cbB, this.c.cbA);
+                } else {
+                    JOptionPane.showMessageDialog(this.c, "El combobox de origen está vacio!");
                 }
             }
         }
         this.c.timer.restart();
     }
 
-    private void tratarString(ArrayList<String> opciones) {
+    private void añadir(ArrayList<String> opciones) {
         String res;
-        int cont = -1;
         res = this.c.txf1.getText().replace(" ;", "");
         res = res.replace(" ;", "");
         res = res.replace(";;", "");
 
-        for (int j = 0; j < res.length(); j++) {
-            if ((res.charAt(j) == ';' || j == 0) && j < res.length() - 1) {
-                opciones.add("");
-                cont++;
-            }
-            if (res.charAt(j) != ';') {
-                opciones.set(cont, opciones.get(cont) + res.charAt(j));
-            }
+        if (res.charAt(0) == ';') {
+            res = res.substring(1, res.length());
+        }
+
+        for (int j = 0; j < res.split(";").length; j++) {
+            this.c.cbA.addItem(res.split(";")[j]);
         }
     }
 
-    private void traspasar(JComboBox<String> origen,JComboBox<String> destino) {
+    private void traspasar(JComboBox<String> origen, JComboBox<String> destino) {
         destino.addItem(origen.getSelectedItem().toString());
         origen.removeItem(origen.getSelectedItem());
         origen.setSize(origen.getPreferredSize());
